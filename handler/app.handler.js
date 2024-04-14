@@ -1,32 +1,33 @@
-exports.createTasks=(request,response)=>{
 
-    const data=request.body
-
-    response.status(201).json({data})
-
+exports.hello=(request,response)=>{
+  return response.send("hello")
 }
 
-exports.listarTasksAll=(request,response)=>{
-    return response.status(200).json({msg:"listando uma tarefa"})
-}
+exports.createTasks = (request, response) => {
+  const data = request.body;
 
-exports.listarTasks=(request,response)=>{
-    const {id}=request.params
+  return response.status(201).json(data);
+};
 
-    return response.status(200).json({msg:`listando a tarefa ${id}`})
+exports.listarTasksAll = (request, response) => {
+  const taskList=task.findAll()
+  return response.status(200).json(taskList);
+};
 
-}
+exports.listarTasks = (request, response) => {
+  const { id } = request.params;
 
-exports.atualizarTasks=(request,response)=>{
-    const {id}=request.params
+  return response.status(200).json({ msg: `listando a tarefa ${id}` });
+};
 
-    return response.status(200).json({msg:`atualizando a tarefa ${id}`})
+exports.atualizarTasks = (request, response) => {
+  const { id } = request.params;
 
-}
+  return response.status(200).json({ msg: `atualizando a tarefa ${id}` });
+};
 
-exports.deletarTasks=(request,response)=>{
-    const {id}=request.params
+exports.deletarTasks = (request, response) => {
+  const { id } = request.params;
 
-    return response.status(200).json({msg:`deletando  a tarefa ${id}`})
-
-}
+  return response.status(200).json({ msg: `deletando  a tarefa ${id}` });
+};

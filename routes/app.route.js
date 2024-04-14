@@ -1,36 +1,15 @@
 
-module.exports= app=> {
+
+module.exports = app => {
   const routes = require("express").Router();
 
-  routes.get("/", (request, response) => {
-    return response.json({ msg: "mergurlho nodejs" });
-  });
-
-  routes.post("/task", (request, response) => {
-    const data = request.body;
-
-    response.status(201).json({ data });
-  });
-
-  routes.get("/task", (request, response) => {
-    return response.status(200).json({ msg: "listando uma tarefa" });
-  });
-  routes.get("/task/:id", (request, response) => {
-    const { id } = request.params;
-
-    return response.status(200).json({ msg: `listando a tarefa ${id}` });
-  });
-  routes.put("/task/:id", (request, response) => {
-    const { id } = request.params;
-
-    return response.status(200).json({ msg: `atualizando a tarefa ${id}` });
-  });
-
-  routes.delete("/task/:id", (request, response) => {
-    const { id } = request.params;
-
-    return response.status(200).json({ msg: `deletando  a tarefa ${id}` });
-  });
-
-
+  const AppHandle=require('../handler/app.handler')
+  
+  routes.get("/",AppHandle.hello );
+  routes.post("/tasks",AppHandle.createTasks)
+  routes.get("/tasks",AppHandle.listarTasksAll);
+  routes.get("/tasks/:id", AppHandle.listarTasks);
+  routes.put("/tasks/:id", AppHandle.atualizarTasks);
+  routes.delete("/tasks/:id", AppHandle.deletarTasks);
+  app.use(routes)
 };
